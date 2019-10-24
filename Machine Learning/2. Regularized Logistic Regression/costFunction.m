@@ -17,7 +17,6 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 %
-% Note: grad should have the same dimensions as theta
 %
 cst = 0;
 summ = 0;
