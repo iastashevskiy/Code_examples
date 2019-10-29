@@ -1,8 +1,7 @@
-Parsing csv - код и данные для парсинга файлов данных .txt, объединения их в один и перевод форматы csv и json
+Parsing csv - data and code for.txt files parcing. Data united, grouped by several categories and converted to csv and json
 
-Hex_calc.py - шестнадцатиричный калькулятор без применения встроенных математических функций и функций перевода из одной системы
-исчисления в другую языка Python
+Hex_calc.py -  hex calculator inmplemented without built-in Python hex to dec functions.
 
-Huffman.py - кодирование фразы согласно алгоритму Хаффмана (обход бинарного дерева)
+Huffman.py - statement encoding in accordance with Huffman algorithm (frequency-sorted binary tree)
 
-Более подробно + комментарии внутри самих файлов
+Additional info and comments are included inside the files.
