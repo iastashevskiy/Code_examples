@@ -27,17 +27,17 @@ predictors_norm = (predictors - predictors.mean()) / predictors.std()
 predictors_norm.head()
 n_cols = predictors_norm.shape[1] # number of predictors
 
-# define regression model
+#	
 def regression():
-    # create model
-    model = Sequential()
-    model.add(Dense(50, activation='relu', input_shape=(n_cols,)))
-    model.add(Dense(50, activation='relu'))
-    model.add(Dense(1))
-    
-    # compile model
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    return model
+	# create model
+	model = Sequential()
+	model.add(Dense(50, activation='relu', input_shape=(n_cols,)))
+	model.add(Dense(50, activation='relu'))
+	model.add(Dense(1))
+	
+	# compile model
+	model.compile(optimizer='adam', loss='mean_squared_error')
+	return model
 
 # build the model
 model = regression()
