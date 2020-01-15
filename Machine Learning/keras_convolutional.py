@@ -1,12 +1,14 @@
-import keras
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.utils import to_categorical
-from keras.layers.convolutional import Conv2D 
-from keras.layers.convolutional import MaxPooling2D 
-from keras.layers import Flatten 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
-from keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.layers import Dense, Conv2D, MaxPool2D, Flatten
+from tensorflow.keras.callbacks import EarlyStopping
+from sklearn.metrics import classification_report,confusion_matrix
+
+from tensorflow.keras.datasets import mnist
 
 # load data
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -29,11 +31,11 @@ def convolutional_model():
 	
 	# create model
 	model = Sequential()
-	model.add(Conv2D(16, (5, 5), activation='relu', input_shape=(28, 28, 1)))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+	model.add(Conv2D(filters=16, kernel_size = (5, 5), activation = 'relu', input_shape=(28, 28, 1)))
+	model.add(MaxPool2D(pool_size=(2, 2), strides=(2, 2)))
 	
-	model.add(Conv2D(8, (2, 2), activation='relu'))
-	model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+	model.add(Conv2D(filters = 8, kernel_size = (2, 2), activation='relu'))
+	model.add(MaxPool2D(pool_size=(2, 2), strides=(2, 2)))
 	
 	model.add(Flatten())
 	model.add(Dense(100, activation='relu'))
@@ -45,10 +47,18 @@ def convolutional_model():
 
 	
 model = convolutional_model()
-
+early_stop = EarlyStopping(monitor='val_loss',patience=2)
+model.summary()
 # fit the model
-model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=200, verbose=2)
+model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=200, verbose=2, callbacks = [early_stop])
 
 # evaluate the model
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: {} \n Error: {}".format(scores[1], 100-scores[1]*100))
+
+losses = pd.DataFrame(model.history.history)
+losses[['accuracy','val_accuracy']].plot()
+plt.show()
+losses[['loss','val_loss']].plot()
+plt.show()
+
