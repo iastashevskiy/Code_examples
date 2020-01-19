@@ -1,6 +1,7 @@
 #Evaluates if image contains a malaria infected or not cell sample. Samples obtained from
-#National Library of Medicine
-
+#National Library of Medicine. It should be downloaded manually from
+#https://doc-0g-30-docs.googleusercontent.com/docs/securesc/hfa8cc7pk2nncv7bln22gbv6u8h0m1d1/biqpdgieog05qdn00otg8gg2mkakosiu/1579456800000/10460567815026798714/03554303542191289441/1N1gcN8_5dZVlIejoC00QZLSZFhGoSoQb?e=download&authuser=0&nonce=4boj509kb7kdm&user=03554303542191289441&hash=dpfmn15jpf5rafh8qgkgsufqhud7jbnl
+#and extracted next to this file.
 #TAKES A LOT OF TIME TO TRAIN
 
 import os

@@ -1,3 +1,6 @@
+#Standard classification task: classifying handwritten digits given in black and white 28*28 pictures.
+#Dataset has been downloaded from MNIST
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
