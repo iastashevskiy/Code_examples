@@ -1,3 +1,5 @@
+#Classifying 32*32 pixel colored images from CIFAR10 dataset
+
 import random
 import pandas as pd
 import numpy as np
