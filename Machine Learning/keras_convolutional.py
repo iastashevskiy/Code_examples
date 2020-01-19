@@ -13,23 +13,23 @@ from tensorflow.keras.datasets import mnist
 # load data
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-# reshape to be [samples][pixels][width][height]
+# reshape to be samples, height, width, color channels
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1).astype('float32')
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1).astype('float32')
 
-# normalize data
+# normalize data. Maximum level is 255, so we'll devide by 255
 X_train = X_train / 255 
 X_test = X_test / 255 
 
+#transforming continious data into classes
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
 num_classes = y_test.shape[1] # number of categories
 
-
+# function for model creation
 def convolutional_model():
 	
-	# create model
 	model = Sequential()
 	model.add(Conv2D(filters=16, kernel_size = (5, 5), activation = 'relu', input_shape=(28, 28, 1)))
 	model.add(MaxPool2D(pool_size=(2, 2), strides=(2, 2)))
@@ -45,14 +45,14 @@ def convolutional_model():
 	model.compile(optimizer='adam', loss='categorical_crossentropy',  metrics=['accuracy'])
 	return model
 
-	
+#constructing a model with an early stop to avoid overfitting	
 model = convolutional_model()
 early_stop = EarlyStopping(monitor='val_loss',patience=2)
 model.summary()
-# fit the model
+# fitting the model
 model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=200, verbose=2, callbacks = [early_stop])
 
-# evaluate the model
+# evaluating the model
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: {} \n Error: {}".format(scores[1], 100-scores[1]*100))
 
